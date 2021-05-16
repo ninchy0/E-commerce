@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
 
-
+        {% block content %}
         <!-- Main Slider Start -->
         <div class="header">
             <div class="container-fluid">
@@ -62,7 +61,11 @@
             <div class="container-fluid">
                 <div class="brand-slider">
                     {% for brand in brands %}
-                    <div class="brand-item"><a><img src="{{ brand.image.url }}"  style=" margin-right:40; height:50; width:70px;"alt=""></a></div>
+                    <div class="brand-item">
+                        <a href="category.html/">
+                            <img src="{{ brand.image.url }}" style=" margin-right:40; height:50; width:70px;"alt="">
+                        </a>
+                    </div>
                     {% endfor %}
                 </div>
             </div>-
@@ -212,7 +215,7 @@
                     <div class="col-lg-3">
                         <div class="product-item">
                             <div class="product-title">
-                                <a href="#">{{ hot.name }}</a>
+                                <a href="/item_detail/{{ hot.slug }}">{{ hot.name }}</a>
                                 <div class="ratting">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -276,7 +279,7 @@
                     <div class="col-lg-3">
                         <div class="product-item">
                             <div class="product-title">
-                                <a href="#">{{ new.name }}</a>
+                                <a href="/item_detail/{{ hot.slug }}">{{ new.name }}</a>
                                 <div class="ratting">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
