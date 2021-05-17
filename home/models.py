@@ -61,3 +61,6 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+    def add_to_cart(self, kwargs):
+        return reverse('cart:add-to-cart', kwargs={'slug':self.slug})

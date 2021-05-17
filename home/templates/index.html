@@ -229,7 +229,7 @@
                                     <img src="{{ hot.image.url }}"  alt="Product Image">
                                 </a>
                                 <div class="product-action">
-                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{ hot.add_to_cart }}"><i class="fa fa-cart-plus"></i></a>
                                     <a href="#"><i class="fa fa-heart"></i></a>
                                     <a href="#"><i class="fa fa-search"></i></a>
                                 </div>
@@ -293,7 +293,7 @@
                                     <img src="{{ new.image.url }}" alt="Product Image">
                                 </a>
                                 <div class="product-action">
-                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{ new.add_to_cart }}"><i class="fa fa-cart-plus"></i></a>
                                     <a href="#"><i class="fa fa-heart"></i></a>
                                     <a href="#"><i class="fa fa-search"></i></a>
                                 </div>
@@ -321,7 +321,7 @@
                     <div class="col-md-6">
                         <div class="review-slider-item">
                             <div class="review-img">
-                                <img src="img/review-1.jpg" alt="Image">
+                                <img src="{% static 'img/review-1.jpg' %}" alt="Image">
                             </div>
                             <div class="review-text">
                                 <h2>Customer Name</h2>
@@ -342,7 +342,7 @@
                     <div class="col-md-6">
                         <div class="review-slider-item">
                             <div class="review-img">
-                                <img src="img/review-2.jpg" alt="Image">
+                                <img src="{% static 'img/review-2.jpg' %}" alt="Image">
                             </div>
                             <div class="review-text">
                                 <h2>Customer Name</h2>
