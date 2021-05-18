@@ -9,5 +9,3 @@ urlpatterns = [
     path('search', ItemSearchView.as_view(), name='search'),
     path('signup', signup, name='signup'),
 ]
-
-# path('brand/<slug>', BrandItemView.as_view(), name='brand'),

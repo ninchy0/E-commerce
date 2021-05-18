@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 STATUS = (('active', 'Active'), ('inactive', 'Inactive'))
 LABEL = (('new', 'New'), ('hot', 'Hot'), ('', 'default'))
 
@@ -7,7 +9,7 @@ class Category(models.Model):
     name = models.CharField(max_length=200)
     logo = models.CharField(max_length=300)
     slug = models.CharField(max_length=300)
-    status = models.CharField(choices= STATUS, max_length=200)
+    status = models.CharField(choices=STATUS, max_length=200)
 
     def __str__(self):
         return self.name
@@ -15,9 +17,9 @@ class Category(models.Model):
 
 class Slider(models.Model):
     name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to= 'media')
+    image = models.ImageField(upload_to='media')
     description = models.TextField()
-    status = models.CharField(choices= STATUS, max_length=200)
+    status = models.CharField(choices=STATUS, max_length=200)
 
     def __str__(self):
         return self.name
@@ -28,7 +30,7 @@ class Ad(models.Model):
     image = models.ImageField(upload_to='media')
     description = models.TextField(blank=True)
     rank = models.IntegerField()
-    status = models.CharField(choices= STATUS, max_length=200)
+    status = models.CharField(choices=STATUS, max_length=200)
 
     def __str__(self):
         return self.name
@@ -37,7 +39,7 @@ class Ad(models.Model):
 class Brand(models.Model):
     name = models.CharField(max_length=300)
     image = models.ImageField(upload_to='media')
-    status = models.CharField(choices= STATUS, max_length=200)
+    status = models.CharField(choices=STATUS, max_length=200)
 
     def __str__(self):
         return self.name
@@ -46,8 +48,8 @@ class Brand(models.Model):
 class Item(models.Model):
     name = models.CharField(max_length=500)
 
-    category = models.ForeignKey(Category, on_delete = models.CASCADE)
-    brand = models.ForeignKey(Brand, on_delete = models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='media')
 
     price = models.IntegerField()
@@ -62,5 +64,5 @@ class Item(models.Model):
     def __str__(self):
         return self.name
 
-    def add_to_cart(self, kwargs):
-        return reverse('cart:add-to-cart', kwargs={'slug':self.slug})
+    def add_to_cart(self):
+        return reverse('cart:add-to-cart', kwargs={'slug': self.slug})

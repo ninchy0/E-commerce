@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from home.models import *
 from .models import Cart
-from home.views import *
+from home.views import BaseView
 
 # Create your views here.
 def add_to_cart(request, slug):
