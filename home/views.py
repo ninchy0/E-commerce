@@ -1,9 +1,9 @@
-from django.contrib import messages
+from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from .models import *
 from django.views.generic import View
-
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 class BaseView(View):
@@ -86,3 +86,19 @@ def signup(request):
             return redirect('home:signup')
 
     return render(request, 'signup.html')
+
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        else:
+            messages.error(request, 'Username/Password doesnt match.')
+            return redirect('home:login')
+
+    return render(request, 'login.html')

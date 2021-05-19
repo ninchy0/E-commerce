@@ -18,7 +18,7 @@ class Category(models.Model):
 class Slider(models.Model):
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to='media')
-    description = models.TextField()
+    description = models.TextField(blank=True)
     status = models.CharField(choices=STATUS, max_length=200)
 
     def __str__(self):

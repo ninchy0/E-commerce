@@ -1988,12 +1988,12 @@ h2 {
 }
 
 .brand .brand-item {
-    text-align: center; 
+    text-align: center;
 }
 
 .brand .brand-item img {
-    max-width: 100%;
-    margin: auto; 
+    margin:auto;
+    padding:auto;
 }
 
 .brand .slick-prev,
