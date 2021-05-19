@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from home.models import *
 from .models import Cart
 from home.views import BaseView
 
 # Create your views here.
+@login_required
 def add_to_cart(request, slug):
     username = request.user.username
     price = Item.objects.get(slug=slug).price
