@@ -102,3 +102,27 @@ def login(request):
             return redirect('home:login')
 
     return render(request, 'login.html')
+
+
+# ------------------------------API------------------------------
+
+# from django.contrib.auth.models import User
+from rest_framework import serializers, viewsets
+from .models import *
+from .serializers import *
+from rest_framework import generics
+from rest_framework.filters import OrderingFilter,SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
+
+# ViewSets define the view behavior.
+class ItemViewSet(viewsets.ModelViewSet):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+class FilterItemViewSet(generics.ListAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+    filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+    filter_fields = ['id', 'category', 'label']
+    ordering_filter = ['id', 'price', 'title']
+    search_fields = ['title', 'description']

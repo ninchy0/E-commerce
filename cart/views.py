@@ -1,8 +1,9 @@
-from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
 from django.shortcuts import redirect, render
 from home.models import *
-from .models import Cart
+from .models import Cart,Contact
 from home.views import BaseView
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 @login_required
@@ -49,3 +50,28 @@ def delete_cart(request, slug):
     username = request.user.username
     Cart.objects.filter(username=username, checkout=False, slug=slug).delete()
     return redirect('cart:my_cart')
+
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        message = request.POST['message']
+        contact = Contact.objects.create(
+            name=name,
+            email=email,
+            subject=subject,
+            message=message
+        )
+        contact.save()
+
+        email = EmailMessage(
+            f'Hello {name}\n{email}',
+            f'subject:{subject}\n{message}',
+            'from@example.com',
+            ['to1@example.com'],
+        )
+        email.send()
+
+    return render(request, 'contact.html')
