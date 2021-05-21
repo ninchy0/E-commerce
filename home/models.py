@@ -24,6 +24,14 @@ class Slider(models.Model):
     def __str__(self):
         return self.name
 
+class Review(models.Model):
+    name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='media')
+    description = models.TextField(blank=True)
+    status = models.CharField(choices=STATUS, max_length=200)
+
+    def __str__(self):
+        return self.name
 
 class Ad(models.Model):
     name = models.CharField(max_length=300)
@@ -50,7 +58,7 @@ class Item(models.Model):
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='media')
+    image = models.ImageField(upload_to='media', null=True)
 
     price = models.IntegerField()
     discounted_price = models.IntegerField(default=0)

@@ -9,4 +9,6 @@ urlpatterns = [
     path('search', ItemSearchView.as_view(), name='search'),
     path('signup', signup, name='signup'),
     path('login', login, name='login'),
+    path('api_data', api_data, name='api_data')
+    # path()
 ]

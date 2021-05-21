@@ -1,9 +1,12 @@
+import json
+import requests
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from .models import *
 from django.views.generic import View
 from django.contrib.auth import authenticate, login
+
 
 # Create your views here.
 class BaseView(View):
@@ -18,6 +21,7 @@ class HomeView(BaseView):
         self.views['brands'] = Brand.objects.filter(status='active')
         self.views['hots'] = Item.objects.filter(status='active', label='hot')
         self.views['news'] = Item.objects.filter(status='active', label='new')
+        self.views['reviews'] = Review.objects.filter(status='active')
 
         return render(request, 'index.html', self.views)
 
@@ -104,20 +108,24 @@ def login(request):
     return render(request, 'login.html')
 
 
-# ------------------------------API------------------------------
+# ------------------------API------------------------------
 
 # from django.contrib.auth.models import User
-from rest_framework import serializers, viewsets
 from .models import *
 from .serializers import *
-from rest_framework import generics
-from rest_framework.filters import OrderingFilter,SearchFilter
+from rest_framework import generics, status, viewsets, serializers
+from rest_framework.filters import OrderingFilter, SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.views import APIView
+from django.http import Http404
+from rest_framework.response import Response
+
 
 # ViewSets define the view behavior.
 class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+
 
 class FilterItemViewSet(generics.ListAPIView):
     queryset = Item.objects.all()
@@ -126,3 +134,40 @@ class FilterItemViewSet(generics.ListAPIView):
     filter_fields = ['id', 'category', 'label']
     ordering_filter = ['id', 'price', 'title']
     search_fields = ['title', 'description']
+
+
+class ItemDetail(APIView):
+
+    def get_object(self, pk):
+        try:
+            return Item.objects.get(id=pk)
+        except:
+            raise Http404
+
+    def get(self, request, pk):
+        object = self.get_object(pk)
+        serializers = ItemSerializer(object)
+        return Response(serializers.data)
+
+    def put(self, request, pk):
+        object = self.get_object(pk)
+        serializers = ItemSerializer(object, data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data)
+        else:
+            pass
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        object = self.get_object(pk)
+        object.delete()
+
+        return Response("The row is deleted.", status=status.HTTP_200_OK)
+
+def api_data(request):
+    api_url = "http://127.0.0.1:8000/api/items/"
+    response = requests.get(api_url)
+    records = response.text
+    records = json.loads(records)
+    return render(request, 'api.html', {'items': records})
