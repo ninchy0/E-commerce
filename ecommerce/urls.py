@@ -25,6 +25,7 @@ urlpatterns = [
     path('cart/', include('cart.urls', namespace='cart')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('api/', include('home.api_urls')),
+    path('wishlist/', include('wishlist.urls', namespace='wishlist')),
 ]
 
 if settings.DEBUG:

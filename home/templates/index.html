@@ -22,10 +22,6 @@
                             {% for slider in sliders %}
                             <div class="header-slider-item">
                                 <img height=400 width = 600 src="{{ slider.image.url }}" alt="Slider Image" />
-                                <div class="header-slider-caption">
-                                    <p>{{ slider.description }}</p>
-                                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
-                                </div>
                             </div>
                             {% endfor %}
                         </div>
@@ -133,7 +129,7 @@
                         <div class="category-item ch-150">
                             <img src="{{ ad.image.url }}" />
                             <a class="category-name" href="">
-                                <p>Some text goes here that describes the image</p>
+                                <p>{{ ad.description }}</p>
                             </a>
                         </div>
                         {% endif %}
@@ -174,21 +170,7 @@
             </div>
         </div>
         <!-- Category End-->       
-        
-        <!-- Call to Action Start -->
-<!--        <div class="call-to-action">-->
-<!--            <div class="container-fluid">-->
-<!--                <div class="row align-items-center">-->
-<!--                    <div class="col-md-6">-->
-<!--                        <h1>call us for any queries</h1>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-6">-->
-<!--                        <a href="tel:0123456789">+012-345-6789</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-        <!-- Call to Action End -->
+
         
         <!-- Featured Product Start -->
         <div class="featured-product product">
@@ -216,14 +198,14 @@
                                 </a>
                                 <div class="product-action">
                                     <a href="{{ hot.add_to_cart }}"><i class="fa fa-cart-plus"></i></a>
-                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="{{ hot.add_to_wishlist }}"><i class="fa fa-heart"></i></a>
                                 </div>
                             </div>
                             <div class="product-price">
                                 {% if hot.discounted_price > 0 %}
-                                <h3><span>$</span>{{ hot.discounted_price }}</h3>
+                                <h3><span>Rs.</span>{{ hot.discounted_price }}</h3>
                                 {% else %}
-                                <h3><span>$</span>{{ hot.price }}</h3>
+                                <h3><span>Rs.</span>{{ hot.price }}</h3>
                                 {% endif %}
                                 <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
@@ -234,24 +216,7 @@
             </div>
         </div>
         <!-- Featured Product End -->       
-        
-        <!-- Newsletter Start -->
-<!--        <div class="newsletter">-->
-<!--            <div class="container-fluid">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-6">-->
-<!--                        <h1>Subscribe Our Newsletter</h1>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-6">-->
-<!--                        <div class="form">-->
-<!--                            <input type="email" value="Your email here">-->
-<!--                            <button>Submit</button>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-        <!-- Newsletter End -->        
+
         
         <!-- Recent Product Start -->
         <div class="recent-product product">
@@ -279,14 +244,14 @@
                                 </a>
                                 <div class="product-action">
                                     <a href="{{ new.add_to_cart }}"><i class="fa fa-cart-plus"></i></a>
-                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="{{ new.add_to_wishlist }}"><i class="fa fa-heart"></i></a>
                                 </div>
                             </div>
                             <div class="product-price">
                                 {% if new.discounted_price > 0 %}
-                                <h3><span>$</span>{{ new.discounted_price }}</h3>
+                                <h3><span>Rs.</span>{{ new.discounted_price }}</h3>
                                 {% else %}
-                                <h3><span>$</span>{{ new.price }}</h3>
+                                <h3><span>Rs.</span>{{ new.price }}</h3>
                                 {% endif %}
                                 <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>

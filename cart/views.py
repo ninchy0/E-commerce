@@ -1,11 +1,11 @@
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect, render
 from home.models import *
-from .models import Cart,Contact
+from .models import Cart, Contact
 from home.views import BaseView
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+# --------------Cart-------------------
 @login_required
 def add_to_cart(request, slug):
     username = request.user.username
@@ -45,6 +45,7 @@ class CartView(BaseView):
         username = request.user.username
         self.views['my_cart'] = Cart.objects.filter(username=username, checkout=False,)
         return render(request, 'cart.html', self.views)
+
 
 def delete_cart(request, slug):
     username = request.user.username

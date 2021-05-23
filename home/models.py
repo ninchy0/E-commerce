@@ -18,7 +18,6 @@ class Category(models.Model):
 class Slider(models.Model):
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to='media')
-    description = models.TextField(blank=True)
     status = models.CharField(choices=STATUS, max_length=200)
 
     def __str__(self):
@@ -74,3 +73,6 @@ class Item(models.Model):
 
     def add_to_cart(self):
         return reverse('cart:add-to-cart', kwargs={'slug': self.slug})
+
+    def add_to_wishlist(self):
+        return reverse('wishlist:add-to-wishlist', kwargs={'slug': self.slug})

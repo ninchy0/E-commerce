@@ -1,5 +1,5 @@
-from django.db import models
 from home.models import *
+from django.db import models
 
 # Create your models here.
 class Cart(models.Model):
@@ -12,6 +12,7 @@ class Cart(models.Model):
 
     def __str__(self):
         return self.username
+
 
 class Contact(models.Model):
     name = models.CharField(max_length=300)
