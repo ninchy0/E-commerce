@@ -10,13 +10,6 @@ from django.contrib.auth.decorators import login_required
 def add_to_wishlist(request, slug):
     username = request.user.username
 
-    # if Wishlist.objects.filter(username=username, slug=slug, checkout=False).exists():
-    #     quantity = Wishlist.objects.get(username=username, slug=slug, checkout=False).quantity
-    #     quantity = quantity + 1
-    #     Wishlist.objects.filter(username=username, slug=slug, checkout=False)
-    #     return redirect('cart:wishlist')
-    # else:
-    #     quantity = 1
     data = Wishlist.objects.create(
         username=username,
         items=Item.objects.filter(slug=slug)[0],

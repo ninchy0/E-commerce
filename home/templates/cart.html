@@ -13,7 +13,7 @@
             </div>
         </div>
         <!-- Breadcrumb End -->
-        
+
         <!-- Cart Start -->
         <div class="cart-page">
             <div class="container-fluid">
@@ -41,15 +41,15 @@
                                                 </div>
                                             </td>
                                             {% if cart.items.discounted_price > 0 %}
-                                            <td>${{ cart.items.discounted_price}}</td>
+                                            <td>Rs.{{ cart.items.discounted_price}}</td>
                                             {% else %}
-                                            <td>${{ cart.items.price}}</td>
+                                            <td>Rs.{{ cart.items.price}}</td>
                                             {% endif %}
                                             <td>
                                                 <div class="qty">
-                                                    <button class="btn-minus"><i class="fa fa-minus"></i></button>
+<!--                                                    <button class="btn-minus"><i class="fa fa-minus"></i></button>-->
                                                     <input type="text" value="{{ cart.quantity }}">
-                                                    <button class="btn-plus"><i class="fa fa-plus"></i></button>
+<!--                                                    <button class="btn-plus"><i class="fa fa-plus"></i></button>-->
                                                 </div>
                                             </td>
                                             <td>Rs.{{ cart.total }}</td>
@@ -72,10 +72,12 @@
                                     <div class="cart-summary">
                                         <div class="cart-content">
                                             <h1>Cart Summary</h1>
-                                            <p>Sub Total<span>$99</span></p>
-                                            <p>Shipping Cost<span>$1</span></p>
-                                            <h2>Grand Total<span>$100</span></h2>
+                                            {% for cart in my_cart %}
+                                            <p>{{ cart.slug }}<span>Rs.{{ cart.total }}</span></p>
+                                            {% endfor %}
+<!--                                            <h2>Grand Total<span>Rs.{{ Cart.grand_total }}</span></h2>-->
                                         </div>
+
                                         <div class="cart-btn">
                                             <a href="/"><button>Update Cart</button></a>
                                             <a href="checkout"> <button>Checkout</button></a>
@@ -89,5 +91,5 @@
             </div>
         </div>
         <!-- Cart End -->
-        
+
         {% endblock %}

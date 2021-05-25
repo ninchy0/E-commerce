@@ -76,3 +76,7 @@ def contact(request):
         email.send()
 
     return render(request, 'contact.html')
+
+
+def checkout(request):
+    return render(request, 'checkout.html')

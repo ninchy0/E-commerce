@@ -75,23 +75,25 @@
                     </div>
                     <div class="col-md-6">
                         <form method = "GET" action="{% url 'home:search' %}">
-                        <div class="search">
-                            <input name="search" type="text" placeholder="Search" required>
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                        </div>
-                            </form>
+                            <div class="search">
+                                <input name="search" type="text" placeholder="Search" required>
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
                     </div>
                     <div class="col-md-3">
+                        {% if user.is_authenticated %}
                         <div class="user">
-                            <a href="wishlist/my_wishlist" class="btn wishlist">
+                            <a href="/wishlist/my_wishlist" class="btn wishlist">
                                 <i class="fa fa-heart"></i>
-                                <span>(0)</span>
+<!--                                <span>(0)</span>-->
                             </a>
-                            <a href="cart/my_cart" class="btn cart">
+                            <a href="/cart/my_cart" class="btn cart">
                                 <i class="fa fa-shopping-cart"></i>
-                                <span>(0)</span>
+<!--                                <span>(0)</span>-->
                             </a>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -125,7 +127,6 @@
                             <div class="contact-info">
                                 <div class="social">
                                     <a href="https://github.com/ninchy0"><i class="fab fa-github"></i></a>
-                                    <a href="https://www.linkedin.com/in/mingmar-l-3a4675204/"><i class="fab fa-linkedin-in"></i></a>
                                     <a href="https://www.tryhackme.com/p/ninchy0"><i class="fab fa-linux"></i></a>
                                 </div>
                             </div>
